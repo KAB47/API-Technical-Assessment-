@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Upload and Revenue Report</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #080808;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="file"] {
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #revenueDisplay {
+            margin-top: 30px;
+            font-size: 1.5em;
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+    <h1>Transaction Upload and Revenue Report</h1>
+    
+    <!-- Form to upload CSV file -->
+    <form id="uploadForm" onsubmit="uploadFile(event)">
+        <p>Select a CSV file to upload transactions:</p>
+        <input type="file" name="file" accept=".csv" required>
+        <button type="submit">Upload</button>
+    </form>
+    
+    <!-- Section to display revenue report -->
+    <div id="revenueDisplay">Revenue: £0.00</div>
+    <button onclick="fetchRevenue()">Get Revenue Report</button>
+
+    <script>
+        // Function to upload the CSV file
+        function uploadFile(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            const formData = new FormData(document.getElementById('uploadForm'));
+
+            fetch('/transactions', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message); // Show success message
+                fetchRevenue(); // Automatically fetch revenue after upload
+            })
+            .catch(error => console.error('Error uploading file:', error));
+        }
+
+        // Function to fetch the revenue report
+        function fetchRevenue() {
+            fetch('/report')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('revenueDisplay').textContent = `Revenue: £${data.revenue.toFixed(2)}`;
+                })
+                .catch(error => console.error('Error fetching revenue:', error));
+        }
+    </script>
+</body>
+</html>
