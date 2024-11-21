@@ -12,12 +12,12 @@ I have provided instructions for all, in the sections below.
 You do not need to set up a virtual environment, as it has already been done.
 
 Setting up the project:
-1. Download the 'API' folder and Unzip the file and open `app.py` to view the code base.
+1. Download the 'app' folder to view the code base.
 2. Open Command Prompt or Terminal as Administrator.
 3. Navigate to the folder containing `app.py` using `cd <path>`. Example: `cd C:\Users\MyLap\Downloads\app\app.py`. Make sure it's not the folder with the same name but the .py file.
 4. Start the server by entering `python app.py`.
 5. Copy the server URL (e.g., `http://127.0.0.1:5000`) from Command Prompt and paste it into a browser.
-6. On the page, click “Choose File” to upload the 'data' CSV file located in the project folder and select “Upload.”
+6. On the page, click “Choose File” to upload the 'data' CSV file located in the 'app' project folder and select 'Upload'.
 7. Transactions will display in the browser.
 8. To view the report, replace `/transactions`' with `/report` in the URL to see expenses, gross revenue, and net revenue.
 
